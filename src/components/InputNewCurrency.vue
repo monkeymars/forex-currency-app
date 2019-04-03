@@ -8,7 +8,7 @@
         <select class="ui tiny header selection dropdown currency-list" v-model="selected_currency" style="margin: 0;">
           <option value="0" disabled selected>Select currency</option>
           <option v-for="(option, index) in options" :key="index" v-bind:value="index">
-            {{ option }}
+            {{index}} - {{ option }}
           </option>
         </select>
         <div class="ui white button" @click="addCurrency(selected_currency)">
@@ -32,20 +32,31 @@ export default {
     }
   },
   computed: mapState(['cards']),
-  props: {
-    base: {
-      type: String,
-      default: 'USD'
-    }
-  },
   mounted () {
     this.options = getCurrecies().currencies
   },
   methods: {
+    isCardExist (currency, object) {
+      let result = []
+      for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+          if (object[key].cardCurrency === currency) {
+            result.push(object[key])
+          }
+        }
+      }
+      return result.length
+        ? true
+        : false
+    },
+
     addCurrency (currency) {
-      let cards = this.$store.getters['getCards']
-      cards.push({ cardCurrency: currency })
-      this.$store.commit('setCards', cards)
+      let isCardExist = this.isCardExist(currency, this.cards)
+      if (currency && !isCardExist) {
+        let cards = this.cards
+        cards.push({ cardCurrency: currency })
+        this.$store.commit('setCards', cards)
+      }
     }
   }
 }
@@ -56,7 +67,7 @@ export default {
     border-radius: 3px 0px 0px 3px !important;
     padding-top: 11px !important;
     background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #fff !important;
-    background-position-x: 190px !important;
+    background-position-x: 225px !important;
     -webkit-appearance: none;
   }
 </style>
