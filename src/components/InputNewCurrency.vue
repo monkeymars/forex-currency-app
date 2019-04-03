@@ -21,7 +21,7 @@
 
 <script>
 import { getCurrecies } from '@/services/rates.service'
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
   name: 'InputNewCurrency',
