@@ -1,14 +1,19 @@
 <template>
-  <div class="ui two column centered grid">
-    <div class="ui action input">
-      <select class="ui selection dropdown currency-list" v-model="selected_currency">
-        <option value="0" disabled selected>Select currency</option>
-        <option v-for="(option, index) in options" :key="index" v-bind:value="index">
-          {{ option }}
-        </option>
-      </select>
-      <div class="ui white button" @click="addCurrency(selected_currency)">
-        <i class="ui black plus icon" style="margin: 0;"></i>
+  <div class="ui two column centered grid" style="margin-bottom:45px;">
+    <div v-show="cards.length" class="ten wide column">
+      <div class="ui divider"></div>
+    </div>
+    <div class="ten wide column">
+      <div class="ui action input centered grid">
+        <select class="ui tiny header selection dropdown currency-list" v-model="selected_currency" style="margin: 0;">
+          <option value="0" disabled selected>Select currency</option>
+          <option v-for="(option, index) in options" :key="index" v-bind:value="index">
+            {{ option }}
+          </option>
+        </select>
+        <div class="ui white button" @click="addCurrency(selected_currency)">
+          <i class="ui black plus icon" style="margin: 0;"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +21,7 @@
 
 <script>
 import { getCurrecies } from '@/services/rates.service'
+import { mapState } from 'vuex';
 
 export default {
   name: 'InputNewCurrency',
@@ -25,6 +31,7 @@ export default {
       options: []
     }
   },
+  computed: mapState(['cards']),
   props: {
     base: {
       type: String,
@@ -36,7 +43,9 @@ export default {
   },
   methods: {
     addCurrency (currency) {
-      console.log(currency)
+      let cards = this.$store.getters['getCards']
+      cards.push({ cardCurrency: currency })
+      this.$store.commit('setCards', cards)
     }
   }
 }
