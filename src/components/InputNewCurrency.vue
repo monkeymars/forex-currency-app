@@ -46,8 +46,6 @@ export default {
         }
       }
       return result.length
-        ? true
-        : false
     },
 
     addCurrency (currency) {
