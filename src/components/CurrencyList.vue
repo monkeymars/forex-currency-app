@@ -7,7 +7,7 @@
     </div>
 
     <div class="extra content">
-      <span class="left floated like"><i>1 USD = IDR 14.144</i></span>
+      <span class="left floated like">1 USD = IDR 14.144</span>
       <button class="ui mini basic white button right floated star">
         <i class="ui red minus icon" style="margin:0;"></i>
       </button>
