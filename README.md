@@ -1,4 +1,4 @@
-# forex
+# forex-currency-app
 
 ## Project setup
 ```
