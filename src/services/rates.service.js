@@ -24,21 +24,21 @@ export const getLatestRates = (callback) => {
  * @returns {Object} callback
  */
 export const getBaseRates = (currency, callback) => {
-    Axios.get(API + 'latest?base=' + currency )
-      .then(response => {
-        callback(response.data)
-      }).catch(err => {
-        callback(err)
-      })
-  }
+  Axios.get(API + 'latest?base=' + currency)
+    .then(response => {
+      callback(response.data)
+    }).catch(err => {
+      callback(err)
+    })
+}
 
 /**
  * Currencies
  * @returns {Object} currencies
  */
 export const getCurrecies = () => {
-    return Currencies
-  }
+  return Currencies
+}
 
 /**
  * Currency Name
