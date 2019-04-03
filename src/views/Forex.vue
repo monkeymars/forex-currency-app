@@ -1,10 +1,7 @@
 <template>
   <div class="ui text container">
-    <!-- Active Currency -->
     <active-currency/>
-    <!-- List of Currency -->
     <currency-list/>
-    <!-- Sumbit New Currency -->
     <input-new-currency/>
   </div>
 </template>
