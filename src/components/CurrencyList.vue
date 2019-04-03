@@ -3,7 +3,6 @@
     <div class="ui cards" style="width: 450px;">
       <card
         v-for="(card, index) in cards" :key="index"
-        :card-index="index"
         :card-currency="card.cardCurrency"
         :currency-name="getName(card.cardCurrency)"
         :rate="getCurrencyRate(card.cardCurrency)"

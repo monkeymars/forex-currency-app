@@ -43,7 +43,6 @@ export default {
     }
   },
   props: [
-    'cardIndex',
     'currencyName',
     'activeNominal',
     'activeCurrency',
