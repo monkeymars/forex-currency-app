@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import _ from 'lodash'
 import Currencies from '@/resource/data.json'
 const API = 'https://api.exchangeratesapi.io/'
 
@@ -9,7 +10,7 @@ const API = 'https://api.exchangeratesapi.io/'
 export const getLatestRates = (callback) => {
   Axios.get(API + 'latest')
     .then(response => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         callback(response.data)
       }
     }).catch(err => {
@@ -25,9 +26,7 @@ export const getLatestRates = (callback) => {
 export const getBaseRates = (currency, callback) => {
     Axios.get(API + 'latest?base=' + currency )
       .then(response => {
-        if (response == 200) {
-          callback(response.data)
-        }
+        callback(response.data)
       }).catch(err => {
         callback(err)
       })
@@ -40,3 +39,18 @@ export const getBaseRates = (currency, callback) => {
 export const getCurrecies = () => {
     return Currencies
   }
+
+/**
+ * Currency Name
+ * @returns {String} currency name
+ */
+export const getCurrecyName = (currencyID, callback) => {
+  let Obj = Currencies.currencies
+  for (var key in Obj) {
+    if (Obj.hasOwnProperty(key)) {
+      if (key === currencyID) {
+        callback(Obj[key])
+      }
+    }
+  }
+}
