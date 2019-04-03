@@ -3,18 +3,18 @@
     <div class="ten wide column">
       <div class="column">
         <i class="ui grey tiny header">
-          {{ selected_currency }} - {{ currencyName }}
+          {{ selectedCurrency }} - {{ currencyName }}
         </i>
         <br>
         <div class="ui input">
           <select
-            v-model="selected_currency"
+            v-model="selectedCurrency"
             class="ui medium header selection dropdown select-currency"
-            @change="changeCurrency(selected_currency)"
+            @change="changeCurrency(selectedCurrency)"
           >
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="IDR">IDR</option>
+            <option v-for="(option, index) in supportedCurrency" :key="index" v-bind:value="option">
+              {{ option }}
+            </option>
           </select>
         </div>
         <div
@@ -22,7 +22,7 @@
           style="margin-top:10px;min-width:200px;"
         >
           <input
-            class="ui medium header"
+            class="ui medium header nominal"
             v-model="nominal"
             min="1"
             type="number"
@@ -48,9 +48,15 @@ export default {
   name: 'ActiveCurrency',
   data () {
     return {
-      selected_currency: 'USD',
-      currencyName: 'United States Dollars'
+      selectedCurrency: 'USD',
+      currencyName: 'United States Dollars',
+      supportedCurrency: ['USD', 'CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW'],
     }
+  },
+  mounted () {
+    getBaseRates(this.selectedCurrency, (result) => {
+      this.$store.commit('setRates', result.rates)
+    })
   },
   computed: {
     nominal: {
@@ -88,6 +94,10 @@ export default {
 </script>
 
 <style>
+  input.nominal::-webkit-inner-spin-button {
+    margin-left: 15px;
+    opacity: 1;
+  }
   .select-currency {
     border: none !important;
     padding: 0 !important;
