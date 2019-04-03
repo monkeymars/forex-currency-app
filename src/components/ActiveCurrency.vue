@@ -38,11 +38,7 @@
 </template>
 
 <script>
-import {
-  getCurrecyName,
-  getCurrecies,
-  getBaseRates
-} from '@/services/rates.service'
+import * as ServiceRates from '@/services/rates.service'
 
 export default {
   name: 'ActiveCurrency',
@@ -54,7 +50,7 @@ export default {
     }
   },
   mounted () {
-    getBaseRates(this.selectedCurrency, (result) => {
+    ServiceRates.getBaseRates(this.selectedCurrency, (result) => {
       this.$store.commit('setRates', result.rates)
     })
   },
@@ -72,11 +68,11 @@ export default {
     changeCurrency (value) {
       this.$store.commit('setCurrency', value)
 
-      getCurrecyName(value, (res) => {
+      ServiceRates.getCurrecyName(value, (res) => {
         this.currencyName = res
       })
 
-      getBaseRates(value, (result) => {
+      ServiceRates.getBaseRates(value, (result) => {
         this.$store.commit('setRates', result.rates)
       })
     }

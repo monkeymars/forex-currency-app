@@ -26,11 +26,11 @@ export default {
   name: 'Card',
   methods: {
     removeCard (currencyId) {
-        let cards = this.$store.getters['getCards']
-        cards = cards.filter((item) => {
-          return item.cardCurrency !== currencyId
-        })
-        this.$store.commit('setCards', cards)
+      let cards = this.$store.getters['getCards']
+      cards = cards.filter((item) => {
+        return item.cardCurrency !== currencyId
+      })
+      this.$store.commit('setCards', cards)
     },
 
     currencyFormatter (currency, nominal) {
@@ -40,7 +40,7 @@ export default {
         minimumFractionDigits: 2
       })
       return formatter.format(nominal)
-    },
+    }
   },
   props: [
     'cardIndex',
