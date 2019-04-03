@@ -12,7 +12,7 @@
             class="ui medium header selection dropdown select-currency"
             @change="changeCurrency(selectedCurrency)"
           >
-            <option v-for="(option, index) in supportedCurrency" :key="index" v-bind:value="index">
+            <option v-for="(option, index) in supportedCurrency" :key="index" v-bind:value="option">
               {{ option }}
             </option>
           </select>
@@ -70,24 +70,15 @@ export default {
   },
   methods: {
     changeCurrency (value) {
-      // set active currency
       this.$store.commit('setCurrency', value)
 
-      // get currency name
       getCurrecyName(value, (res) => {
         this.currencyName = res
       })
 
-      // get base rates
       getBaseRates(value, (result) => {
         this.$store.commit('setRates', result.rates)
       })
-
-      console.log(
-        this.$store.getters['getCurrency'],
-        this.$store.getters['getNominal'],
-        this.$store.getters['getRates']
-      )
     }
   }
 }
