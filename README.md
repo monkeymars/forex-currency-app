@@ -1,5 +1,15 @@
 # forex-currency-app
 
+## Build Docker Image
+```
+docker build -t grwb/forex-currency-app .
+```
+
+## Run Docker Image
+```
+docker run -it -p 8080:80 --rm --name forex-currency-app grwb/forex-currency-app
+```
+
 ## Project setup
 ```
 yarn install
