@@ -1,15 +1,5 @@
 # forex-currency-app
 
-## Build Docker Image
-```
-docker build -t grwb/forex-currency-app .
-```
-
-## Run Docker Image
-```
-docker run -it -p 8080:80 --rm --name forex-currency-app grwb/forex-currency-app
-```
-
 ## Project setup
 ```
 yarn install
@@ -25,20 +15,29 @@ yarn run serve
 yarn run build
 ```
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
 ### Run your unit tests
 ```
 yarn run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Run with Docker
+
+### Build Docker Image
+```
+docker build -t grwb/forex-currency-app .
+```
+
+### Run Docker Image
+```
+docker run -it -p 8080:80 --rm --name forex-currency-app grwb/forex-currency-app
+```
+
+### Run Docker Image
+```
+docker run -it -p 8080:80 --rm --name forex-currency-app grwb/forex-currency-app
+```
+
+### Running
+```
+Then open http://localhost:8080/ to see the app.
+```
