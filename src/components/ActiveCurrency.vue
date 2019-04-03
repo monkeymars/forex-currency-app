@@ -12,7 +12,7 @@
             class="ui medium header selection dropdown select-currency"
             @change="changeCurrency(selectedCurrency)"
           >
-            <option v-for="(option, index) in supportedCurrency" :key="index" v-bind:value="option">
+            <option v-for="(option, index) in supportedCurrency" :key="index" v-bind:value="index">
               {{ option }}
             </option>
           </select>
@@ -50,7 +50,7 @@ export default {
     return {
       selectedCurrency: 'USD',
       currencyName: 'United States Dollars',
-      supportedCurrency: ['USD', 'CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW'],
+      supportedCurrency: ['USD', 'CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW']
     }
   },
   mounted () {

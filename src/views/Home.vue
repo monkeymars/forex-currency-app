@@ -2,17 +2,10 @@
   <div class="ui text container">
     <!-- Active Currency -->
     <active-currency/>
-
     <!-- List of Currency -->
-    <div class="ui one column centered grid">
-      <div class="ui cards" style="width: 450px;">
-        <currency-list/>
-        <div class="ui divider"></div>
-      </div>
-    </div>
-
+    <currency-list/>
     <!-- Sumbit New Currency -->
-    <input-new-currency base="USD"/>
+    <input-new-currency/>
   </div>
 </template>
 
