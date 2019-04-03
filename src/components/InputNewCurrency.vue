@@ -15,10 +15,7 @@
 </template>
 
 <script>
-import {
-  getLatestRates,
-  getCurrecies
-} from '@/services/rates.service'
+import { getCurrecies } from '@/services/rates.service'
 
 export default {
   name: 'InputNewCurrency',
@@ -36,11 +33,6 @@ export default {
   },
   mounted () {
     this.options = getCurrecies().currencies
-    console.log(this.options)
-
-    getLatestRates((result) => {
-      console.log('result', result)
-    })
   },
   methods: {
     addCurrency (currency) {
