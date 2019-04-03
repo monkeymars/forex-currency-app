@@ -1,23 +1,70 @@
 <template>
-  <div class="ui fluid card">
-    <div class="content">
-      <span class="ui large header right floated" style="margin:0;">144.120</span>
-      <div class="ui large header left floated" style="margin:0;">IDR</div>
-      <span class="description left floated">IDR - Indonesian Rupiah</span>
-    </div>
-
-    <div class="extra content">
-      <span class="left floated like">1 USD = IDR 14.144</span>
-      <button class="ui mini basic white button right floated star">
-        <i class="ui red minus icon" style="margin:0;"></i>
-      </button>
+  <div class="ui one column centered grid">
+    <div class="ui cards" style="width: 450px;">
+      <card
+        v-for="(card, index) in cards" :key="index"
+        :card-currency="card.cardCurrency"
+        :currency-name="getName(card.cardCurrency)"
+        :rate="getCurrencyRate(card.cardCurrency)"
+        :active-currency="currency"
+        :active-nominal="nominal"
+      />
+      <div class="ui divider"></div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Card from '@/components/Card'
+import {
+  getCurrecyName,
+  getCurrecies,
+  getBaseRates
+} from '@/services/rates.service'
+
 export default {
   name: 'CurrencyList',
-  mounted () {}
+  data () {
+    return {
+      cards: [
+        { cardCurrency: 'IDR' },
+        { cardCurrency: 'USD' },
+        { cardCurrency: 'JPY' }
+      ]
+    }
+  },
+  components: {
+    Card
+  },
+  computed: mapState([
+    'nominal',
+    'currency',
+    'rates'
+  ]),
+  methods: {
+    getCurrencyRate (currencyId) {
+      let result,
+        Obj = this.rates
+
+      for (var key in Obj) {
+        if (Obj.hasOwnProperty(key)) {
+          if (key === currencyId) {
+            result = Obj[key]
+          }
+        }
+      }
+      return result
+    },
+    getName (currencyId) {
+      let currecyName;
+
+      getCurrecyName(currencyId, (result) => {
+        currecyName = result
+      })
+
+      return currecyName
+    }
+  }
 }
 </script>
